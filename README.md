@@ -21,11 +21,11 @@ All components must adhere strictly to these values.
 
 ### Phase 1: Foundation & Data Generation (Component 1)
 **Goal:** Create the dummy data that will fuel the rest of the system.
-* [ ] **Repo Setup:** Initialize git, create the `README.md`, and set up the `./transcripts/` directory.
-* [ ] **Generator Core:** Create the `TranscriptGenerator` class and `CallTranscript` dataclass in Python.
-* [ ] **CLI Argument Parsing:** Implement `argparse` to allow configuring the number of transcripts (default 50) and output directory.
-* [ ] **Logic & Randomization:** Implement weighted randomness for categories (40% BILLING, 35% TECHNICAL, 15% SALES, 10% GENERAL). Enforce IVR containment rules (Technical/Sales always escalate, Billing 60% contained).
-* [ ] **File I/O:** Write the generated JSON files to the target directory.
+* [ ] **Repo Setup:** Initialize git, create the `README.md`, and set up the `./transcripts/` directory. - David and jathan
+* [ ] **Generator Core:** Create the `TranscriptGenerator` class and `CallTranscript` dataclass in Python. - Jathan 
+* [ ] **CLI Argument Parsing:** Implement `argparse` to allow configuring the number of transcripts (default 50) and output directory. - David
+* [ ] **Logic & Randomization:** Implement weighted randomness for categories (40% BILLING, 35% TECHNICAL, 15% SALES, 10% GENERAL). Enforce IVR containment rules (Technical/Sales always escalate, Billing 60% contained).  - Jathan
+* [ ] **File I/O:** Write the generated JSON files to the target directory. - David
 
 ### Phase 2: Database Initialization & Schema (Component 3)
 **Goal:** Stand up the database and define the query-first architecture before building the ETL.

@@ -14,5 +14,3 @@ class CallTranscript:
     agentId : str | None
     ivrPath : list[str]
     
-
-        

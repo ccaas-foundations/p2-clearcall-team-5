@@ -1,8 +1,12 @@
 """Transcript Generator is designed to generate the rules of a creating, writing, repeating one call transcript.
 The __init__ stores the config, helper methods generate the pieces, and the main method generates many files to output directory."""
+import argparse
 from pathlib import Path
 import random
 from datetime import datetime, timedelta, timezone
+import uuid
+import json
+from dataclasses import asdict
 from CallTranscript import CallTranscript
 
 class TranscriptGenerator:
@@ -53,11 +57,52 @@ class TranscriptGenerator:
         end_time = start_time + timedelta(seconds=duration_seconds)
         return start_time, end_time
     
+    #Assembles all the pieces into a single call transcript object
     def generate_transcript(self):
-        pass
+        #Python's built-in uuid module
+        callId = str(uuid.uuid4())
+        category = self.get_call_category()
+        is_contained = self.get_ivr_containment(category)
+        escalatedToAgent = not is_contained
+        agentId = self.get_agent_id(is_contained)
+        startTime, endTime = self.generate_times(category)
+        ivrPath = ["WELCOME", "GENERAL", "RESOLVED"]
+        #CallTranscript object
+        return CallTranscript(
+            callId=callId,
+            startTime=startTime,
+            endTime=endTime,
+            callCategory=category,
+            ivrContained=is_contained,
+            escalatedToAgent=escalatedToAgent,
+            agentId=agentId,
+            ivrPath=ivrPath
+        )   
+    
+    #Writes the generated transcript object to a physical JSON file
     def write_transcript(self, transcript):
-        pass
+        # using asdict from dataclasses module
+        transcript_dict = asdict(transcript)
+        transcript_dict["startTime"] = transcript.startTime.isoformat()
+        transcript_dict["endTime"] = transcript.endTime.isoformat()
+        
+        file_path = self.output_dir / f"{transcript.callId}.json"
+        with open(file_path, "w") as f:
+            json.dump(transcript_dict, f, indent=2)
+        
+    
     def generate_many(self, count=50):
         for _ in range(count):
             transcript = self.generate_transcript()
             self.write_transcript(transcript)
+
+#Check if this script is being executed directly, set up argparse to accept command-line arguments for output directory and number of transcripts to generate
+if __name__ == "__main__":
+    #Set up argparse to accept --output and --count flags.
+    parser = argparse.ArgumentParser(description="Generate call transcripts")
+    parser.add_argument("--output", type=str, default="transcripts", help="Output directory for transcripts")
+    parser.add_argument("--count", type=int, default=50, help="Number of transcripts to generate")
+    args = parser.parse_args()
+    
+    generator = TranscriptGenerator(args.output, agent_ids=["agent-1", "agent-2", "agent-3", "agent-4", "agent-5"])
+    generator.generate_many(args.count)
