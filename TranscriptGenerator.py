@@ -57,6 +57,28 @@ class TranscriptGenerator:
         end_time = start_time + timedelta(seconds=duration_seconds)
         return start_time, end_time
     
+    #Matches the ivrpath result of each specific call.
+    #In otherwords, what exactly happened within the call path.
+    def build_ivr_path(self, category, ivr_contained):
+        path = ["WELCOME", category]
+
+        if category == "BILLING":
+            path.append("ACCOUNT_LOOKUP")
+        elif category == "TECHNICAL":
+            path.append("DEVICE_CHECK")
+        elif category == "SALES":
+            path.append("PRODUCT_INFO")
+        elif category == "GENERAL":
+            path.append("MENU_HELP")
+
+        if ivr_contained:
+            path.append("RESOLVED")
+        else:
+            path.append("TRANSFER_TO_AGENT")
+
+        return path
+        
+    
     #Assembles all the pieces into a single call transcript object
     def generate_transcript(self):
         #Python's built-in uuid module
@@ -66,7 +88,7 @@ class TranscriptGenerator:
         escalatedToAgent = not is_contained
         agentId = self.get_agent_id(is_contained)
         startTime, endTime = self.generate_times(category)
-        ivrPath = ["WELCOME", "GENERAL", "RESOLVED"]
+        ivrPath = self.build_ivr_path(category, is_contained)
         #CallTranscript object
         return CallTranscript(
             callId=callId,
