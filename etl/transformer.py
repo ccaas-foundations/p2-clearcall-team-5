@@ -27,23 +27,23 @@ class TranscriptTransformer:
             )
         
         
-        
-if __name__ == "__main__":
-    # 1. Create a fake dictionary that looks like the parser output
-    mock_raw_data = {
-        "callId": "1234-abcd",
-        "startTime": "2026-04-01T10:00:00+00:00",
-        "endTime": "2026-04-01T10:05:30+00:00",  # 5 mins, 30 secs
-        "callCategory": "BILLING",
-        "ivrContained": True,
-        "escalatedToAgent": False,
-        "agentId": None,
-        "ivrPath": ["WELCOME", "BILLING", "RESOLVED"]
-    }
+# unblock to test the transformer with a mock input      
+# if __name__ == "__main__":
+#     # 1. Create a fake dictionary that looks like the parser output
+#     mock_raw_data = {
+#         "callId": "1234-abcd",
+#         "startTime": "2026-04-01T10:00:00+00:00",
+#         "endTime": "2026-04-01T10:05:30+00:00",  # 5 mins, 30 secs
+#         "callCategory": "BILLING",
+#         "ivrContained": True,
+#         "escalatedToAgent": False,
+#         "agentId": None,
+#         "ivrPath": ["WELCOME", "BILLING", "RESOLVED"]
+#     }
 
-    # 2. Run it through your transformer
-    transformer = TranscriptTransformer()
-    result = transformer.transform(mock_raw_data)
+#     # 2. Run it through your transformer
+#     transformer = TranscriptTransformer()
+#     result = transformer.transform(mock_raw_data)
 
-    # 3. Print the resulting dataclass
-    print(result)
+#     # 3. Print the resulting dataclass
+#     print(result)
