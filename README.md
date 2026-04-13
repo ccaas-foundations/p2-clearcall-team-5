@@ -28,8 +28,8 @@ All components must adhere strictly to these values.
 * [ ] **File I/O:** Write the generated JSON files to the target directory. - David
 
 ### Phase 2: Database Initialization & Schema (Component 3)
-**Goal:** Stand up the database and define the query-first architecture before building the ETL.
-* [ ] **Docker Setup:** Spin up a local Cassandra instance using Docker.
+**Goal:** Stand up the database and define the query-first architecture before building the ETL. 
+* [ ] **Docker Setup:** Spin up a local Cassandra instance using Docker. 
 * [ ] **Keyspace Creation:** Create the `clearcall` keyspace with `SimpleStrategy`.
 * [ ] **Table 1 (`calls_by_date`):** Design table for time-of-day analysis (Partition key: `call_date`).
 * [ ] **Table 2 (`calls_by_agent`):** Design table for agent metrics (Partition key: `agent_id`).
@@ -37,11 +37,11 @@ All components must adhere strictly to these values.
 
 ### Phase 3: The ETL Pipeline (Component 2)
 **Goal:** Read the generated JSON, transform it, and load it into Cassandra.
-* [ ] **Data Models:** Define the `CallRecord` dataclass.
-* [ ] **Extract (`parser.py`):** Read JSON files, validate required fields, and gracefully skip/log malformed records without crashing.
-* [ ] **Transform (`transformer.py`):** Convert raw JSON dicts into `CallRecord` objects. Calculate `duration_seconds` using `datetime` math and extract `call_date`.
-* [ ] **Load (`loader.py`):** Use the `cassandra-driver` Python package to insert a single `CallRecord` into all three Cassandra tables simultaneously.
-* [ ] **Orchestration (`main.py`):** Tie the Extract, Transform, and Load steps together into a single executable script with CLI arguments.
+* [ ] **Data Models:** Define the `CallRecord` dataclass. - David and Jathan
+* [ ] **Extract (`parser.py`):** Read JSON files, validate required fields, and gracefully skip/log malformed records without crashing. - Jathan
+* [ ] **Transform (`transformer.py`):** Convert raw JSON dicts into `CallRecord` objects. Calculate `duration_seconds` using `datetime` math and extract `call_date`. - David
+* [ ] **Load (`loader.py`):** Use the `cassandra-driver` Python package to insert a single `CallRecord` into all three Cassandra tables simultaneously. - David
+* [ ] **Orchestration (`main.py`):** Tie the Extract, Transform, and Load steps together into a single executable script with CLI arguments. - Jathan
 
 ### Phase 4: Java Reporting Service (Component 4)
 **Goal:** Expose the Cassandra data via a Spring Boot REST API.
