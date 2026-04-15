@@ -10,12 +10,11 @@ import dev.revature.clearcall.repository.CallByDateRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
+
 
 @Service
 public class AnalyticsService {
