@@ -29,11 +29,11 @@ All components must adhere strictly to these values.
 
 ### Phase 2: Database Initialization & Schema (Component 3)
 **Goal:** Stand up the database and define the query-first architecture before building the ETL. 
-* [ ] **Docker Setup:** Spin up a local Cassandra instance using Docker. 
-* [ ] **Keyspace Creation:** Create the `clearcall` keyspace with `SimpleStrategy`.
-* [ ] **Table 1 (`calls_by_date`):** Design table for time-of-day analysis (Partition key: `call_date`).
-* [ ] **Table 2 (`calls_by_agent`):** Design table for agent metrics (Partition key: `agent_id`).
-* [ ] **Table 3 (`calls_by_category`):** Design table for category trends (Partition key: `call_category`).
+* [ ] **Docker Setup:** Spin up a local Cassandra instance using Docker.  - David and Jathan
+* [ ] **Keyspace Creation:** Create the `clearcall` keyspace with `SimpleStrategy`.  - David and Jathan
+* [ ] **Table 1 (`calls_by_date`):** Design table for time-of-day analysis (Partition key: `call_date`).  - David and Jathan
+* [ ] **Table 2 (`calls_by_agent`):** Design table for agent metrics (Partition key: `agent_id`).  - David and Jathan
+* [ ] **Table 3 (`calls_by_category`):** Design table for category trends (Partition key: `call_category`).  - David and jathan
 
 ### Phase 3: The ETL Pipeline (Component 2)
 **Goal:** Read the generated JSON, transform it, and load it into Cassandra.
@@ -45,8 +45,8 @@ All components must adhere strictly to these values.
 
 ### Phase 4: Java Reporting Service (Component 4)
 **Goal:** Expose the Cassandra data via a Spring Boot REST API.
-* [ ] **Project Setup:** Initialize Spring Boot with `spring-boot-starter-web` and `spring-boot-starter-data-cassandra`. Configure `application.yml`.
-* [ ] **Entity Mapping:** Create `CallByDate`, `CallByAgent`, and `CallByCategory` entities using `@Table` and `@PrimaryKeyColumn`.
-* [ ] **Repositories:** Create the three corresponding interfaces extending `CassandraRepository`.
-* [ ] **Agent Endpoints:** Build `GET /analytics/agents/{agentId}/calls` and `GET /analytics/agents/{agentId}/handle-time`. Use Java Streams to calculate the average handle time.
-* [ ] **Global Endpoints:** Build `GET /analytics/categories` and `GET /analytics/calls?date={date}`.
+* [ ] **Project Setup:** Initialize Spring Boot with `spring-boot-starter-web` and `spring-boot-starter-data-cassandra`. Configure `application.yml`.   - David
+* [ ] **Entity Mapping:** Create `CallByDate`, `CallByAgent`, and `CallByCategory` entities using `@Table` and `@PrimaryKeyColumn`.  - David and Jathan
+* [ ] **Repositories:** Create the three corresponding interfaces extending `CassandraRepository`.  - David and jathan
+* [ ] **Agent Endpoints:** Build `GET /analytics/agents/{agentId}/calls` and `GET /analytics/agents/{agentId}/handle-time`. Use Java Streams to calculate the average handle time.  -David and Jathan
+* [ ] **Global Endpoints:** Build `GET /analytics/categories` and `GET /analytics/calls?date={date}`.  - Jathan
